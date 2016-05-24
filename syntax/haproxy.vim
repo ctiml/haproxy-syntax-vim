@@ -40,11 +40,13 @@ syn match   hapIp1       /\(\d\{1,3}\.\d\{1,3}\.\d\{1,3}\.\d\{1,3}\)\?:\d\{1,5}/
 syn match   hapIp2       /,\(\d\{1,3}\.\d\{1,3}\.\d\{1,3}\.\d\{1,3}\)\?:\d\{1,5}/hs=s+1 nextgroup=hapIp2 contained
 
 " Parameters
+syn keyword hapParam     acl
 syn keyword hapParam     chroot cliexp clitimeout contimeout
 syn keyword hapParam     daemon debug disabled
 syn keyword hapParam     enabled
 syn keyword hapParam     fullconn
-syn keyword hapParam     gid grace
+syn keyword hapParam     gid grace group
+syn keyword hapParam     if
 syn keyword hapParam     maxconn monitor-uri
 syn keyword hapParam     nbproc noepoll nopoll
 syn keyword hapParam     pidfile
@@ -56,8 +58,8 @@ syn keyword hapParam     rspdel  rspdeny    skipwhite nextgroup=hapRegexp
 syn keyword hapParam     rspidel rspideny   skipwhite nextgroup=hapRegexp
 syn keyword hapParam     reqsetbe reqisetbe skipwhite nextgroup=hapRegexp2
 syn keyword hapParam     reqadd reqiadd rspadd rspiadd
-syn keyword hapParam     server source srvexp srvtimeout
-syn keyword hapParam     uid ulimit-n
+syn keyword hapParam     source srvexp srvtimeout
+syn keyword hapParam     uid ulimit-n user
 syn keyword hapParam     reqrep reqirep rsprep rspirep    skipwhite nextgroup=hapRegexp
 syn keyword hapParam     errorloc errorloc302 errorloc303 skipwhite nextgroup=hapStatus
 syn keyword hapParam     default_backend                  skipwhite nextgroup=hapSectLabel
@@ -71,10 +73,15 @@ syn keyword hapParam     source      skipwhite nextgroup=hapIpPort
 syn keyword hapParam     mode        skipwhite nextgroup=hapMode
 syn keyword hapParam     monitor-net skipwhite nextgroup=hapIPv4Mask
 syn keyword hapParam     option      skipwhite nextgroup=hapOption
-syn keyword hapParam     stats       skipwhite nextgroup=hapStats
-syn keyword hapParam     server      skipwhite nextgroup=hapServerN
+"syn keyword hapParam     stats       skipwhite nextgroup=hapStats
+syn match hapParam      +^\s\+stats+       skipwhite nextgroup=hapStats
+"syn keyword hapParam     server      skipwhite nextgroup=hapServerN
+syn match hapParam      +^\s\+server+      skipwhite nextgroup=hapServerN
 syn keyword hapParam     source      skipwhite nextgroup=hapServerEOL
+syn keyword hapParam     timeout
 syn keyword hapParam     log         skipwhite nextgroup=hapGLog,hapLogIp
+syn keyword hapParam     lua-load
+syn keyword hapParam     use_backend skipwhite nextgroup=hapSectLabel
 
 " Options and additional parameters
 syn keyword hapAppSess   contained len timeout
@@ -83,7 +90,7 @@ syn keyword hapLen       contained len
 syn keyword hapGLog      contained global
 syn keyword hapMode      contained http tcp health
 syn keyword hapOption    contained abortonclose allbackups checkcache clitcpka dontlognull forceclose forwardfor
-syn keyword hapOption    contained httpchk httpclose httplog keepalive logasap persist srvtcpka ssl-hello-chk
+syn keyword hapOption    contained httpchk httpclose httplog http-server-close keepalive logasap persist srvtcpka ssl-hello-chk
 syn keyword hapOption    contained tcplog tcpka tcpsplice
 syn keyword hapOption    contained except skipwhite nextgroup=hapIPv4Mask
 syn keyword hapStats     contained uri realm auth scope enable
