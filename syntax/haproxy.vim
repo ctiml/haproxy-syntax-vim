@@ -74,9 +74,9 @@ syn keyword hapParam     mode        skipwhite nextgroup=hapMode
 syn keyword hapParam     monitor-net skipwhite nextgroup=hapIPv4Mask
 syn keyword hapParam     option      skipwhite nextgroup=hapOption
 "syn keyword hapParam     stats       skipwhite nextgroup=hapStats
-syn match hapParam      +^\s\+stats+       skipwhite nextgroup=hapStats
+syn match hapParam      /^\s\+stats/    skipwhite nextgroup=hapStats
 "syn keyword hapParam     server      skipwhite nextgroup=hapServerN
-syn match hapParam      +^\s\+server+      skipwhite nextgroup=hapServerN
+syn match hapParam      /^\s\+server/   skipwhite nextgroup=hapServerN
 syn keyword hapParam     source      skipwhite nextgroup=hapServerEOL
 syn keyword hapParam     timeout
 syn keyword hapParam     log         skipwhite nextgroup=hapGLog,hapLogIp
