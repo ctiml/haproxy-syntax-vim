@@ -40,13 +40,13 @@ syn match   hapIp1       /\(\d\{1,3}\.\d\{1,3}\.\d\{1,3}\.\d\{1,3}\)\?:\d\{1,5}/
 syn match   hapIp2       /,\(\d\{1,3}\.\d\{1,3}\.\d\{1,3}\.\d\{1,3}\)\?:\d\{1,5}/hs=s+1 nextgroup=hapIp2 contained
 
 " Parameters
-syn keyword hapParam     acl
+syn keyword hapParam     acl skipwhite nextgroup=hapAcl
 syn keyword hapParam     chroot cliexp clitimeout contimeout
 syn keyword hapParam     daemon debug disabled
 syn keyword hapParam     enabled
 syn keyword hapParam     fullconn
 syn keyword hapParam     gid grace group
-syn keyword hapParam     if
+syn keyword hapParam     if skipwhite nextgroup=hapAcl
 syn keyword hapParam     maxconn monitor-uri
 syn keyword hapParam     nbproc noepoll nopoll
 syn keyword hapParam     pidfile
@@ -73,10 +73,8 @@ syn keyword hapParam     source      skipwhite nextgroup=hapIpPort
 syn keyword hapParam     mode        skipwhite nextgroup=hapMode
 syn keyword hapParam     monitor-net skipwhite nextgroup=hapIPv4Mask
 syn keyword hapParam     option      skipwhite nextgroup=hapOption
-"syn keyword hapParam     stats       skipwhite nextgroup=hapStats
-syn match hapParam      /^\s\+stats/    skipwhite nextgroup=hapStats
-"syn keyword hapParam     server      skipwhite nextgroup=hapServerN
-syn match hapParam      /^\s\+server/   skipwhite nextgroup=hapServerN
+syn match   hapParam     /^\s\+stats/       skipwhite nextgroup=hapStats
+syn match   hapParam     /^\s\+server/      skipwhite nextgroup=hapServerN
 syn keyword hapParam     source      skipwhite nextgroup=hapServerEOL
 syn keyword hapParam     timeout
 syn keyword hapParam     log         skipwhite nextgroup=hapGLog,hapLogIp
@@ -85,6 +83,7 @@ syn keyword hapParam     use_backend skipwhite nextgroup=hapSectLabel
 
 " Options and additional parameters
 syn keyword hapAppSess   contained len timeout
+syn match   hapAcl       contained /\S\+/
 syn keyword hapBalance   contained roundrobin source
 syn keyword hapLen       contained len
 syn keyword hapGLog      contained global
@@ -132,6 +131,7 @@ else
     command -nargs=+ HiLink hi def link <args>
 endif
 
+HiLink      hapAcl       Title
 HiLink      hapEscape    SpecialChar
 HiLink      hapBackRef   Special
 HiLink      hapComment   Comment
