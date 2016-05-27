@@ -34,7 +34,7 @@ syn case ignore
 
 " Sections
 syn match   hapSection   /^\s*\(global\|defaults\)/
-syn match   hapSection   /^\s*\(listen\|frontend\|backend\|ruleset\)/         skipwhite nextgroup=hapSectLabel
+syn match   hapSection   /^\s*\(listen\|frontend\|backend\|ruleset\|userlist\)/         skipwhite nextgroup=hapSectLabel
 syn match   hapSectLabel /\S\+/                                               skipwhite nextgroup=hapIp1 contained
 syn match   hapIp1       /\(\d\{1,3}\.\d\{1,3}\.\d\{1,3}\.\d\{1,3}\)\?:\d\{1,5}/        nextgroup=hapIp2 contained
 syn match   hapIp2       /,\(\d\{1,3}\.\d\{1,3}\.\d\{1,3}\.\d\{1,3}\)\?:\d\{1,5}/hs=s+1 nextgroup=hapIp2 contained
